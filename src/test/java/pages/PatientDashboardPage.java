@@ -2,22 +2,36 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class PatientDashboardPage extends BasePage {
+
+    @FindBy(linkText="Capture Vitals")
+    WebElement linkCaptureVitals;
+    @FindBy(linkText="End Visit")
+    WebElement endVisit;
+    @FindBy(xpath="//*[@id='end-visit-dialog']//button[.='Yes']")
+    WebElement endVisitConfirm;
+    @FindBy(xpath="//*[@class='toast-item toast-type-success']/p")
+    WebElement captureMessage;
 
     public PatientDashboardPage(WebDriver navegador) {
         super(navegador);
     }
 
     public CaptureVitalsPage ClickCaptureVitals() {
-        navegador.findElement(By.linkText("Capture Vitals")).click();
+        linkCaptureVitals.click();
         return new CaptureVitalsPage(navegador);
     }
     public PatientDashboardPage ClickEndVisit() {
-        navegador.findElement(By.linkText("End Visit")).click();
-        navegador.findElement(By.xpath("//*[@id=\"end-visit-dialog\"]//button[contains(text(),'Yes')]")).click();
-
+        endVisit.click();
+        endVisitConfirm.click();
         return this;
+    }
+    public String sucessMessage()
+    {
+        return captureMessage.getText();
     }
 
 }

@@ -3,84 +3,90 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
 public class RegisterAPatientPage extends BasePage {
 
+    @FindBy(name="givenName")
+    WebElement givenName;
+    @FindBy(name="familyName")
+    WebElement familyName;
+    @FindBy(xpath="//span[contains(text(),'Gender')]")
+    WebElement menuGender;
+    @FindBy(id="gender-field")
+    WebElement gendeField;
+    @FindBy(xpath="//span[contains(text(),'Birthdate')]")
+    WebElement menuBirthDate;
+    @FindBy(id="birthdateDay-field")
+    WebElement dayBirthDate;
+    @FindBy(id="demographics-birthdate")
+    WebElement comboMonth;
+    @FindBy(id="birthdateYear-field")
+    WebElement yearBirthDate;
+    @FindBy(xpath="//span[contains(text(),'Address')]")
+    WebElement menuAddress;
+    @FindBy(id="address1")
+    WebElement address;
+    @FindBy(id="cityVillage")
+    WebElement cityVillage;
+    @FindBy(id="stateProvince")
+    WebElement stateProvince;
+    @FindBy(id="country")
+    WebElement country;
+    @FindBy(id="postalCode")
+    WebElement postalCode;
+    @FindBy(xpath="//span[contains(text(),'Phone Number')]")
+    WebElement menuPhoneNumber;
+    @FindBy(name="phoneNumber")
+    WebElement phoneNumber;
+    @FindBy(xpath="//span[contains(text(),'Relatives')]")
+    WebElement menuRelatives;
+    @FindBy(id="relationship_type")
+    WebElement relationshipType;
+    @FindBy(xpath="//input[@placeholder='Person Name']")
+    WebElement personalName;
+    @FindBy(xpath="//span[contains(text(),'Confirm')]")
+    WebElement menuConfirm;
+    @FindBy(id="submit")
+    WebElement submit;
+
+
     public RegisterAPatientPage(WebDriver navegador) {
+
         super(navegador);
     }
-    public RegisterAPatientPage typeName(String given, String familyName) {
-        navegador.findElement(By.name("givenName")).sendKeys(given);
-        navegador.findElement(By.name("familyName")).sendKeys(familyName);
 
-        return this;
+    public PatientPage registerAPatient(String a_name, String b_name, String c_gender, String d_birthday,
+                                        String e_birthday, String f_birthday,
+                                        String g_address, String h_address, String i_address, String j_address,
+                                        String l_address, String m_phone,String n_relatives, String o_relatives) {
+
+        givenName.sendKeys(a_name);
+        familyName.sendKeys(b_name);
+        menuGender.click();
+        new Select(gendeField).selectByVisibleText(c_gender);
+        menuBirthDate.click();
+        dayBirthDate.sendKeys(d_birthday);
+        WebElement fieldSelect = comboMonth.findElement(By.id("birthdateMonth-field"));
+        new Select(fieldSelect).selectByVisibleText(e_birthday);
+        yearBirthDate.sendKeys(f_birthday);
+        menuAddress.click();
+        address.sendKeys(g_address);
+        cityVillage.sendKeys(h_address);
+        stateProvince.sendKeys(i_address);
+        country.sendKeys(j_address);
+        postalCode.sendKeys(l_address);
+        menuPhoneNumber.click();
+        phoneNumber.sendKeys(m_phone);
+        menuRelatives.click();
+        new Select(relationshipType).selectByVisibleText(n_relatives);//Parent
+        personalName.sendKeys(o_relatives);
+        menuConfirm.click();
+        submit.click();
+
+        return new PatientPage(navegador);
+
     }
 
-    public RegisterAPatientPage typeGender(String gender) {
-        navegador.findElement(By.xpath("//span[contains(text(),'Gender')]")).click();
-        // Identificar a popup onde está o formulário
-        WebElement form = navegador.findElement(By.id("gender"));
-        // Na combo de name "type" escolhe a opção "Female"
-        WebElement fieldSelect = form.findElement(By.id("gender-field"));
-        new Select(fieldSelect).selectByVisibleText(gender);
-
-        return this;
-    }
-
-    public RegisterAPatientPage typeBirthdate(String day, String month, String year) {
-        navegador.findElement(By.xpath("//span[contains(text(),'Birthdate')]")).click();
-        navegador.findElement(By.id("birthdateDay-field")).sendKeys(day);
-        // Identificar a popup onde está o formulário
-        WebElement form = navegador.findElement(By.id("demographics-birthdate"));
-        // Na combo escolher a opção "March"
-        WebElement fieldSelect = form.findElement(By.id("birthdateMonth-field"));
-        new Select(fieldSelect).selectByVisibleText(month);
-
-        navegador.findElement(By.id("birthdateYear-field")).sendKeys(year);
-
-        return this;
-    }
-    public RegisterAPatientPage typeAddress(String address, String city, String state, String country, String postalCode) {
-        navegador.findElement(By.xpath("//span[contains(text(),'Address')]")).click();
-        navegador.findElement(By.id("address1")).sendKeys(address);
-        navegador.findElement(By.id("cityVillage")).sendKeys(city);
-        navegador.findElement(By.id("stateProvince")).sendKeys(state);
-        navegador.findElement(By.id("country")).sendKeys(country);
-        navegador.findElement(By.id("postalCode")).sendKeys(postalCode);
-
-        return this;
-    }
-    public RegisterAPatientPage typePhoneNumber(String number) {
-        navegador.findElement(By.xpath("//span[contains(text(),'Phone Number')]")).click();
-        navegador.findElement(By.name("phoneNumber")).sendKeys(number);
-
-        return this;
-    }
-    public RegisterAPatientPage typeRelatives(String typeRelationship, String name) {
-        navegador.findElement(By.xpath("//span[contains(text(),'Relatives')]")).click();
-        WebElement fieldSelect = navegador.findElement(By.id("relationship_type"));
-        new Select(fieldSelect).selectByVisibleText(typeRelationship);//Parent
-
-        navegador.findElement(By.xpath("//input[@placeholder=\"Person Name\"]")).sendKeys(name);
-
-        return this;
-    }
-    public HomePage clickConfirm() {
-        navegador.findElement(By.xpath("//span[contains(text(),'Confirm')]")).click();
-        navegador.findElement(By.id("submit")).click();
-        return new HomePage(navegador);
-    }
-
-    public HomePage createPatient(String given, String familyName, String gender, String day, String month, String year,
-                                  String address, String city, String state, String country, String postalCode,
-                                  String number,String typeRelationship, String name) {
-        return typeName(given, familyName)
-                .typeGender(gender)
-                .typeBirthdate(day, month, year)
-                .typeAddress(address, city, state, country, postalCode)
-                .typePhoneNumber(number)
-                .typeRelatives(typeRelationship, name)
-                .clickConfirm();
-    }
 }
