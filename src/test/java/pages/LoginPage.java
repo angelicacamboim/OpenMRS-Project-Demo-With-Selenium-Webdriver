@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import suporte.Screenshot;
 
 public class LoginPage extends BasePage {
 
@@ -26,6 +27,7 @@ public class LoginPage extends BasePage {
         username.sendKeys(login);
         password.sendKeys(value);
         selectLocationForThisSession.click();
+        Screenshot.tirar(navegador, "loginPage");
         buttonLogin.click();
         return new HomePage(navegador);
     }

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import suporte.Screenshot;
 
 public class HomePage extends BasePage {
 
@@ -17,10 +18,12 @@ public class HomePage extends BasePage {
     }
 
     public RegisterAPatientPage clickMenuRegisterAPatient() {
+        Screenshot.tirar(navegador, "HomePage");
         linkRegisterAPatient.click();
         return new RegisterAPatientPage(navegador);
     }
     public FindPatientRecordPage clickMenuFindPatientRecord() {
+        Screenshot.tirar(navegador, "HomePage");
         linkFindAPatient.click();
         return new FindPatientRecordPage(navegador);
     }

@@ -1,0 +1,3 @@
+CaptureVitalsPatient,patient,height,weight,temperature,pulse,respiratoryRate,bloodPressure1,bloodPressure2,bloodOxygenSaturation,messageSucess
+                    ,Ester Halls,180,80,40,40,50,50,50,60,Entered Vitals for Ester Halls
+                    ,Robert Willians,170,85,40,50,60,60,55,100,Entered Vitals for Robert Willians

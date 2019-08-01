@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import suporte.Screenshot;
 
 public class FindPatientRecordPage extends BasePage {
 
@@ -17,6 +18,7 @@ public class FindPatientRecordPage extends BasePage {
 
     public PatientPage findPatientRecord(String name) {
         patientSearch.sendKeys(name);//robert hall
+        Screenshot.tirar(navegador, "findPatientRecord");
         navegador.findElement(By.xpath("//td[contains(text(),'" + name +"')]")).click();
 
         return new PatientPage(navegador);

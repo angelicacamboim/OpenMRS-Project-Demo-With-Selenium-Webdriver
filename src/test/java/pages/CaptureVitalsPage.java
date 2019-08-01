@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import suporte.Screenshot;
 
 public class CaptureVitalsPage extends BasePage {
 
@@ -65,6 +66,7 @@ public class CaptureVitalsPage extends BasePage {
         menuBloodOxygenSaturation.click();
         oxygenSaturation.sendKeys(h_oxygen);//100
         menuConfirm.click();
+        Screenshot.tirar(navegador, "CaptureVitalsPatient");
         save.click();
         return new PatientDashboardPage(navegador);
     }

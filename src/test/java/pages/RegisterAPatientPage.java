@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import suporte.Screenshot;
 
 public class RegisterAPatientPage extends BasePage {
 
@@ -83,6 +84,7 @@ public class RegisterAPatientPage extends BasePage {
         new Select(relationshipType).selectByVisibleText(n_relatives);//Parent
         personalName.sendKeys(o_relatives);
         menuConfirm.click();
+        Screenshot.tirar(navegador, "RegisterAPatientPage");
         submit.click();
 
         return new PatientPage(navegador);

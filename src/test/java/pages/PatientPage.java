@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import suporte.Screenshot;
 
 public class PatientPage extends BasePage {
 
@@ -42,6 +43,7 @@ public class PatientPage extends BasePage {
     public PatientPage deletePatient() {
         deletePatient.click();
         deleteReason.sendKeys("Yes, I'm sure!");
+        Screenshot.tirar(navegador, "deletePatient");
         deletePatientConfirm.click();
         return this;
     }
